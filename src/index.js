@@ -105,9 +105,9 @@ class PDFViewer extends React.Component {
     }
 
     handleRotateLeft() {
-        if (this.state.rotationAngle !== -180) {
+        if (this.state.rotationAngle !== -90) {
             this.setState({
-                rotationAngle: this.state.rotationAngle - 90,
+                rotationAngle: -180,
             })
         }
 
@@ -129,9 +129,9 @@ class PDFViewer extends React.Component {
     }
 
     handleRotateRight() {
-        if (this.state.rotationAngle !== 180) {
+        if (this.state.rotationAngle !== 90) {
             this.setState({
-                rotationAngle: this.state.rotationAngle + 90,
+                rotationAngle: 180,
             })
         }
 
