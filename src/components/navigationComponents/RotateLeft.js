@@ -6,7 +6,7 @@ const RotateLeft = ({ css, rotationAngle, handleRotateLeft }) => {
         css ||
         'button is-black is-marginless has-margin-left-5 has-margin-right-5'
 
-    if (rotationAngle === -90) {
+    if (rotationAngle === -180) {
         return (
             <button className={rotateLeftClass} disabled>
                 <span className='icon is-small'>
