@@ -6,15 +6,6 @@ const RotateRight = ({ css, rotationAngle, handleRotateRight }) => {
         css ||
         'button is-black is-marginless has-margin-left-5 has-margin-right-5'
 
-    if (rotationAngle === 180) {
-        return (
-            <button className={rotateRightClass} disabled>
-                <span className='icon is-small'>
-                    <i className='material-icons'>rotate_right</i>
-                </span>
-            </button>
-        )
-    }
 
     return (
         <button className={rotateRightClass} onClick={handleRotateRight}>
