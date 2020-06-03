@@ -29,6 +29,20 @@ class PDFViewer extends React.Component {
         this.handleRotateRight = this.handleRotateRight.bind(this)
     }
 
+    componentDidMount() {
+        window.addEventListener('wheel', (ev) =>{
+            if(ev.ctrlKey) {
+                if(ev.wheelDeltaY === 360) {
+                    this.handleZoomIn();
+                }
+
+                if(ev.wheelDeltaY === -360) {
+                    this.handleZoomOut()
+                }
+            }
+        });
+    }
+
     hot_keys = {
         'ctrl+r': { // combo from mousetrap
           priority: 1,
@@ -37,7 +51,15 @@ class PDFViewer extends React.Component {
         'ctrl+i': { // combo from mousetrap
           priority: 1,
           handler: (event) => this.handleRotateLeft(),
-        }
+        },
+        'ctrl+plus': { // combo from mousetrap
+            priority: 1,
+            handler: (event) => this.handleZoomIn(),
+          },
+          'ctrl+-': { // combo from mousetrap
+            priority: 1,
+            handler: (event) => this.handleZoomOut(),
+          }
       } 
 
     getPageCount(pages) {
