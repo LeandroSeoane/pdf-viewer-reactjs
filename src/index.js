@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import 'bulma/css/bulma.css'
-import 'bulma-helpers/css/bulma-helpers.min.css'
+import 'index.css'
 import 'material-design-icons/iconfont/material-icons.css'
 
 import PDF from './components/RenderPdf'
 import Navigation from './components/NavigationBar'
 import Loader from './components/Loader'
+import {hotkeys} from 'react-keyboard-shortcuts'
 
 class PDFViewer extends React.Component {
     constructor(props) {
@@ -29,6 +29,17 @@ class PDFViewer extends React.Component {
         this.handleResetRotation = this.handleResetRotation.bind(this)
         this.handleRotateRight = this.handleRotateRight.bind(this)
     }
+
+    hot_keys = {
+        'ctrl+r': { // combo from mousetrap
+          priority: 1,
+          handler: (event) => this.handleRotateRight(),
+        },
+        'ctrl+i': { // combo from mousetrap
+          priority: 1,
+          handler: (event) => this.handleRotateLeft(),
+        }
+      } 
 
     getPageCount(pages) {
         if (this.state.pages !== pages) {
@@ -357,4 +368,4 @@ PDFViewer.defaultProps = {
     navbarOnTop: false,
 }
 
-export default PDFViewer
+export default hotkeys(PDFViewer)
