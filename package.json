@@ -50,6 +50,7 @@
         "rollup-plugin-uglify": "^6.0.4"
     },
     "dependencies": {
+        "jquery": "^3.6.0",
         "material-design-icons": "^3.0.1",
         "pdfjs-dist": "^2.3.200",
         "prop-types": "^15.7.2",

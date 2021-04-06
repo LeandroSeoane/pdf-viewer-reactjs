@@ -5,7 +5,7 @@ import 'material-design-icons/iconfont/material-icons.css'
 import PDF from './components/RenderPdf'
 import Navigation from './components/NavigationBar'
 import Loader from './components/Loader'
-import {hotkeys} from 'react-keyboard-shortcuts'
+import { hotkeys } from 'react-keyboard-shortcuts'
 
 class PDFViewer extends React.Component {
     constructor(props) {
@@ -30,13 +30,37 @@ class PDFViewer extends React.Component {
     }
 
     componentDidMount() {
-        window.addEventListener('wheel', (ev) =>{
-            if(ev.ctrlKey) {
-                if(ev.wheelDeltaY === 360) {
+        window.addEventListener('wheel', (ev) => {
+            if (ev.ctrlKey) {
+                if (ev.wheelDeltaY > 0) {
                     this.handleZoomIn();
                 }
 
-                if(ev.wheelDeltaY === -360) {
+                if (ev.wheelDeltaY < 0) {
+                    this.handleZoomOut()
+                }
+            }
+        });
+
+        window.addEventListener('mousewheel', (ev) => {
+            if (ev.ctrlKey) {
+                if (ev.wheelDeltaY > 0) {
+                    this.handleZoomIn();
+                }
+
+                if (ev.wheelDeltaY < 0) {
+                    this.handleZoomOut()
+                }
+            }
+        });
+
+        window.addEventListener('DOMMouseScroll', (ev) => {
+            if (ev.ctrlKey) {
+                if (ev.wheelDeltaY > 0) {
+                    this.handleZoomIn();
+                }
+
+                if (ev.wheelDeltaY < 0) {
                     this.handleZoomOut()
                 }
             }
@@ -45,22 +69,22 @@ class PDFViewer extends React.Component {
 
     hot_keys = {
         'ctrl+r': { // combo from mousetrap
-          priority: 1,
-          handler: (event) => this.handleRotateRight(),
+            priority: 1,
+            handler: (event) => this.handleRotateRight(),
         },
         'ctrl+i': { // combo from mousetrap
-          priority: 1,
-          handler: (event) => this.handleRotateLeft(),
+            priority: 1,
+            handler: (event) => this.handleRotateLeft(),
         },
         'ctrl+plus': { // combo from mousetrap
             priority: 1,
             handler: (event) => this.handleZoomIn(),
-          },
-          'ctrl+-': { // combo from mousetrap
+        },
+        'ctrl+-': { // combo from mousetrap
             priority: 1,
             handler: (event) => this.handleZoomOut(),
-          }
-      } 
+        }
+    }
 
     getPageCount(pages) {
         if (this.state.pages !== pages) {
@@ -139,7 +163,7 @@ class PDFViewer extends React.Component {
     handleRotateRight() {
         this.setState({
             rotationAngle: this.state.rotationAngle + 90,
-        },() => {
+        }, () => {
             if (this.props.onRotation) {
                 this.props.onRotation(this.state.rotationAngle)
             }
@@ -161,7 +185,7 @@ class PDFViewer extends React.Component {
     handleRotateLeft() {
         this.setState({
             rotationAngle: this.state.rotationAngle - 90,
-        },() => {
+        }, () => {
             if (this.props.onRotation) {
                 this.props.onRotation(this.state.rotationAngle)
             }
@@ -215,7 +239,7 @@ class PDFViewer extends React.Component {
         if (!hideNavbar && pages > 0) {
             nav =
                 !navigation ||
-                (navigation && typeof navigation === 'object') ? (
+                    (navigation && typeof navigation === 'object') ? (
                     <Navigation
                         page={page}
                         pages={pages}
@@ -268,9 +292,9 @@ class PDFViewer extends React.Component {
                             canvasCss
                                 ? {}
                                 : {
-                                      height: '1000px',
-                                      overflow: 'auto',
-                                  }
+                                    height: '1000px',
+                                    overflow: 'auto',
+                                }
                         }>
                         {loader ? loader : <Loader />}
                     </div>
@@ -285,9 +309,9 @@ class PDFViewer extends React.Component {
                                     canvasCss
                                         ? {}
                                         : {
-                                              height: '1000px',
-                                              overflow: 'auto',
-                                          }
+                                            height: '1000px',
+                                            overflow: 'auto',
+                                        }
                                 }
                                 onClick={onDocumentClick}>
                                 {pdf}
@@ -301,9 +325,9 @@ class PDFViewer extends React.Component {
                                     canvasCss
                                         ? {}
                                         : {
-                                              height: '1000px',
-                                              overflow: 'auto',
-                                          }
+                                            height: '1000px',
+                                            overflow: 'auto',
+                                        }
                                 }
                                 onClick={onDocumentClick}>
                                 {pdf}
